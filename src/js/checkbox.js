@@ -1,4 +1,5 @@
 const createTeam = document.querySelector('.create');
+const editTeam = document.querySelector('.edit');
 const setTeams = document.querySelector('.set_teams');
 const checkboxes = document.querySelectorAll('input');
 const teamz = setTeams.querySelectorAll('.teamz');
@@ -7,11 +8,11 @@ const dots = Array.from(document.querySelectorAll('.dots'));
 const teamSelect = document.querySelectorAll('.active_team');
 const names = document.querySelectorAll('.name');
 
-names.forEach(name => addEventListener('input', (event) => {
-  console.log(name.textContent);
-  name.textContent.replace(name, event.target);
-  //name.replace(name.innerHTML, event.target);
-}));
+// names.forEach(name => addEventListener('input', (event) => {
+//   console.log(name.textContent);
+//   name.textContent.replace(name, event.target);
+//   //name.replace(name.innerHTML, event.target);
+// }));
 
 let teams = [];
 let score = 0;
@@ -55,9 +56,11 @@ const calculateScore = (event, target) => {
   const current = event.target;
   if (teams.length) {
 
-    const activeTeamID = teams.filter(team => team.players[0]);
+    var teamSelect = parseInt(document.querySelectorAll('.active_team__select')[0].value);
 
-    const activeTeam = activeTeamID.filter(team => team.id === activeTeamID[0].id)[0];
+    const activeTeam = teams[teamSelect];
+
+    const activeTeamSelected = teams.filter(team => team.id === activeTeam)[0];
 
     activeTeam.score += parseInt(current.dataset.dot);
     updateTeamData(activeTeam);
@@ -76,9 +79,12 @@ const updateTeamSelect = () => {
   });
 }
 
+const editTeams = (checkbox) => {
+  checkboxes.forEach(checkbox => checkbox.removeAttribute('disabled'));
+}
 
 const updateTeamData = (activeTeam) => {
-  console.log(activeTeam);
+  //console.log(activeTeamSelected);
   activeTeam.players.forEach((player, index) => {
     document.querySelectorAll('.teamz')[index].innerHTML = `${player.name} has ${activeTeam.score} dots.`
   })
@@ -92,9 +98,14 @@ document.addEventListener("click", event => {
   return teams;
 });
 
+
 createTeam.addEventListener("click", (event) => {
   createTeams(checkboxes, event.target.id)
 });
+
+editTeam.addEventListener('click', (event) => {
+  editTeams(checkboxes, event.target);
+})
 
 dots.forEach(dot => dot.addEventListener('click', calculateScore));
 
