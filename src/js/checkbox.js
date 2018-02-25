@@ -1,7 +1,7 @@
 const createTeam = document.querySelector('.create');
 const editTeam = document.querySelector('.edit');
 const setTeams = document.querySelector('.set_teams');
-const checkboxes = document.querySelectorAll('input');
+const checkboxes = Array.from(document.querySelectorAll('input'));
 const teamz = setTeams.querySelectorAll('.teamz');
 const scoreBoard = document.querySelector('.score');
 const dots = Array.from(document.querySelectorAll('.dots'));
@@ -19,16 +19,16 @@ const checkboxDOMselect = (checkValue, parentElement) => {
     newElem.classList.add('teamz');
     newElem.appendChild(name);
     parentElement.appendChild(newElem);
-  } else if (!checkValue.checked) {
-    setTeams.childNodes.forEach(team => {
-      if (checkValue.name === team.textContent) {
-      parentElement.removeChild(team);
-    }});
   }
+  // else if (!checkValue.checked) {
+  //   setTeams.childNodes.forEach(team => {
+  //     if (checkValue.name === team.textContent) {
+  //     parentElement.removeChild(team);
+  //   }});
+  // }
 }
 
 const createTeams = (arr, target) => {
-  console.log(!arr.checked);
   if (!arr.checked) {
     const players = Array.from(document.querySelectorAll('input:checked')).filter((input => {
       return {
@@ -114,7 +114,7 @@ const editTeams = (checkbox) => {
 
 const updateTeamData = (activeTeam) => {
   activeTeam.players.forEach((player, index) => {
-    document.querySelectorAll('.teamz')[index].innerHTML = `${player.name} has ${activeTeam.score} dots.`
+    document.querySelectorAll('.teamz')[player.value - 1].innerHTML = `${player.name} has ${activeTeam.score} dots.`
   })
 };
 
@@ -127,6 +127,9 @@ document.addEventListener("click", event => {
   return teams;
 });
 
+// checkboxes.addEventListener('change', (event) =>{
+//   createTeams(checkboxes, event.target.id)
+// })
 createTeam.addEventListener("click", (event) => {
   createTeams(checkboxes, event.target.id)
 });
