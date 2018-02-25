@@ -62,6 +62,7 @@ const parseTeams = (teams) => {
   // map through array to split them up
   teams.map((team, index) => {
     // filter through the array
+    console.log(teams[0], teams[1]);
     teams[teams.length - 1].players.filter(team => {
       // compare the players in each array remove the duplicates
       if (!team.name) {
@@ -120,6 +121,7 @@ const updateTeamData = (activeTeam) => {
 // EL's
 document.addEventListener("click", event => {
   if (!teams.includes(event.target) && event.target.matches("input")) {
+    //event.target.parentNode.classList.add('hide');
     checkboxDOMselect(event.target, setTeams);
   }
   return teams;
