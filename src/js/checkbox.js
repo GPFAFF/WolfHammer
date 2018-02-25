@@ -8,12 +8,6 @@ const dots = Array.from(document.querySelectorAll('.dots'));
 const teamSelect = document.querySelectorAll('.active_team');
 const names = document.querySelectorAll('.name');
 
-// names.forEach(name => addEventListener('input', (event) => {
-//   console.log(name.textContent);
-//   name.textContent.replace(name, event.target);
-//   //name.replace(name.innerHTML, event.target);
-// }));
-
 let teams = [];
 let score = 0;
 
@@ -21,7 +15,6 @@ let score = 0;
 const checkboxDOMselect = (checkValue, parentElement) => {
   if (checkValue.checked) {
     const newElem = document.createElement('p');
-    //var name = document.createTextNode(`${checkValue.name} has 0 dots.`);
     const name = document.createTextNode(checkValue.name);
     newElem.classList.add('teamz');
     newElem.appendChild(name);
@@ -35,19 +28,47 @@ const checkboxDOMselect = (checkValue, parentElement) => {
 }
 
 const createTeams = (arr, target) => {
-  const players = Array.from(document.querySelectorAll('input:checked')).map(input => { return { id: input.id, name: input.name }; });
+  console.log(!arr.checked);
+  if (!arr.checked) {
+    const players = Array.from(document.querySelectorAll('input:checked')).filter((input => {
+      return {
+        id: input.id,
+        name: input.name
+      };
+    }))
 
-  if (players.length) {
-    teams.push({
-      players,
-      score: 0,
-      id: teams.length
+    if (players.length) {
+      teams.push({
+        players,
+        score: 0,
+        id: teams.length
+      })
+      if (teams.length >= 2) {
+        createTeam.setAttribute("disabled", "disabled");
+      }
+      parseTeams(teams);
+      updateTeamSelect();
+    }
+    if (!players.length) {
+      console.error('PICK A PLAYER');
+    }
+  }
+  // const players = Array.from(document.querySelectorAll('input:checked')).map(input => { return { id: input.id, name: input.name }; });
+}
+
+const parseTeams = (teams) => {
+
+  // get team array
+  // map through array to split them up
+  teams.map((team, index) => {
+    // filter through the array
+    teams[teams.length - 1].players.filter(team => {
+      // compare the players in each array remove the duplicates
+      if (!team.name) {
+        teams.pop();
+      }
     })
-    updateTeamSelect();
-  }
-  if (!players.length) {
-    console.error('PICK A PLAYER');
-  }
+  })
 }
 
 
@@ -64,6 +85,8 @@ const calculateScore = (event, target) => {
 
     activeTeam.score += parseInt(current.dataset.dot);
     updateTeamData(activeTeam);
+  } else {
+      console.error('You must pick a player first.');
   }
 }
 
@@ -74,9 +97,14 @@ const updateTeamSelect = () => {
   teams.forEach(item => {
     const teamOption = document.createElement('option');
     teamOption.value = item.id;
-    teamOption.innerText = `Team ${item.id}`;
+    teamOption.innerText = `Team ${item.id + 1}`;
     teamSelect.appendChild(teamOption);
   });
+  checkboxes.forEach(checkbox => {
+    if (checkbox.checked) {
+      checkbox.setAttribute('disabled', true);
+    }
+  })
 }
 
 const editTeams = (checkbox) => {
@@ -84,7 +112,6 @@ const editTeams = (checkbox) => {
 }
 
 const updateTeamData = (activeTeam) => {
-  //console.log(activeTeamSelected);
   activeTeam.players.forEach((player, index) => {
     document.querySelectorAll('.teamz')[index].innerHTML = `${player.name} has ${activeTeam.score} dots.`
   })
@@ -98,7 +125,6 @@ document.addEventListener("click", event => {
   return teams;
 });
 
-
 createTeam.addEventListener("click", (event) => {
   createTeams(checkboxes, event.target.id)
 });
@@ -108,48 +134,3 @@ editTeam.addEventListener('click', (event) => {
 })
 
 dots.forEach(dot => dot.addEventListener('click', calculateScore));
-
-
-// const teams = [];
-
-// const updateTeamData = () => {
-//   document.querySelectorAll('#team-data')[0].innerHTML = JSON.stringify(teams);
-// }
-
-// const updateTeamSelect = () => {
-//   const teamSelect = document.querySelectorAll('#active-team')[0];
-//   teamSelect.innerHTML = '';
-
-//   teams.forEach(item => {
-//     const teamOption = document.createElement('option');
-//     teamOption.value = item.id;
-//     teamOption.innerText = `Team ${item.id}`;
-//     teamSelect.appendChild(teamOption);
-//   });
-// }
-
-// document.querySelectorAll('#create')[0].addEventListener('click', e => {
-//   const players = Array.from(document.querySelectorAll('input:checked')).map(input => { return { id: input.dataset.id, name: input.dataset.name }; });
-
-//   if (players.length) teams.push({
-//     players,
-//     score: 0,
-//     id: teams.length,
-//   });
-
-//   updateTeamData();
-//   updateTeamSelect();
-// });
-
-// BUTTONS
-// Array.from(document.querySelectorAll('.update-score')).forEach(item => {
-//   item.addEventListener('click', e => {
-//     if (teams.length) {
-//       const activeTeamId = parseInt(document.querySelectorAll('#active-team')[0].value);
-//       const activeTeam = teams.filter(team => team.id === activeTeamId)[0];
-
-//       activeTeam.score += parseInt(e.target.dataset.scoreMod);
-//       updateTeamData();
-//     }
-//   });
-// });
