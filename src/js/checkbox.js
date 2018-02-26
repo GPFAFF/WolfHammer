@@ -1,7 +1,9 @@
 const createTeam = document.querySelector('.create');
 const editTeam = document.querySelector('.edit');
+const clearTeam = document.querySelector('.clear');
 const setTeams = document.querySelector('.set_teams');
 const checkboxes = Array.from(document.querySelectorAll('input'));
+const teamSelectBox = document.querySelectorAll('.active_team__select');
 const teamz = setTeams.querySelectorAll('.teamz');
 const scoreBoard = document.querySelector('.score');
 const dots = Array.from(document.querySelectorAll('.dots'));
@@ -12,21 +14,31 @@ let teams = [];
 let score = 0;
 
 
-const checkboxDOMselect = (checkValue, parentElement) => {
-  if (checkValue.checked) {
-    const newElem = document.createElement('p');
-    const name = document.createTextNode(checkValue.name);
-    newElem.classList.add('teamz');
-    newElem.appendChild(name);
-    parentElement.appendChild(newElem);
-  }
-  // else if (!checkValue.checked) {
-  //   setTeams.childNodes.forEach(team => {
-  //     if (checkValue.name === team.textContent) {
-  //     parentElement.removeChild(team);
-  //   }});
-  // }
-}
+// const checkboxDOMselect = (checkValue) => {
+//   // console.log(checkValue);
+//   // console.log(setTeams);
+//   // if (checkValue.checked) {
+//   //   setTeams.childNodes.forEach((team, index) => setTeams[index].innerHTML = event.target.name);
+
+//   // }
+//   // setTeams.childNodes.forEach(team => team.innerHTML = event.target.name);
+
+//   //setTeams.appendChild(checkValue.name);
+//   if (checkValue.checked) {
+
+//     const newElem = document.createElement('p');
+//     const name = document.createTextNode(checkValue.name);
+//     newElem.classList.add('teamz');
+//     newElem.appendChild(name);
+//     parentElement.appendChild(newElem);
+//   } else if (!checkValue.checked) {
+//     teams.pop();
+//     setTeams.childNodes.forEach(team => {
+//       if (checkValue.name === team.textContent) {
+//       parentElement.removeChild(team);
+//     }});
+//   }
+// }
 
 const createTeams = (arr, target) => {
   if (!arr.checked) {
@@ -48,7 +60,6 @@ const createTeams = (arr, target) => {
       if (teams.length >= 2) {
         createTeam.setAttribute("disabled", "disabled");
       }
-      parseTeams(teams);
       updateTeamSelect();
     }
     if (!players.length) {
@@ -58,22 +69,25 @@ const createTeams = (arr, target) => {
   // const players = Array.from(document.querySelectorAll('input:checked')).map(input => { return { id: input.id, name: input.name }; });
 }
 
-const parseTeams = (teams) => {
+const clearTeams = (teams, checkboxes) => {
+  checkboxes.forEach(checkbox => {
+    checkbox.checked = false
+    checkbox.removeAttribute('disabled');
+  });
+  createTeam.removeAttribute('disabled');
 
-  // get team array
-  // map through array to split them up
-  teams.map((team, index) => {
-    // filter through the array
-    console.log(teams[0], teams[1]);
-    teams[teams.length - 1].players.filter(team => {
-      // compare the players in each array remove the duplicates
-      if (!team.name) {
-        teams.pop();
-      }
-    })
+  teamSelectBox.forEach((select) => {
+    while (select.firstChild) {
+      select.removeChild(select.firstChild);
+    }
+  });
+
+  setTeams.childNodes.forEach((team, index) => {
+    team.childNodes.forEach(target => target.remove());
   })
-}
 
+  teams.length = 0;
+}
 
 const calculateScore = (event, target) => {
   event.preventDefault();
@@ -95,6 +109,8 @@ const calculateScore = (event, target) => {
 
 const updateTeamSelect = () => {
   const teamSelect = document.querySelectorAll('.active_team__select')[0];
+
+  console.log(teamSelect);
   teamSelect.innerHTML = '';
 
   teams.forEach(item => {
@@ -121,17 +137,21 @@ const updateTeamData = (activeTeam) => {
 };
 
 // EL's
-document.addEventListener("click", event => {
-  if (!teams.includes(event.target) && event.target.matches("input")) {
-    //event.target.parentNode.classList.add('hide');
-    checkboxDOMselect(event.target, setTeams);
-  }
-  return teams;
-});
+// document.addEventListener("click", event => {
+//   if (!teams.includes(event.target) && event.target.matches("input")) {
+//     //event.target.parentNode.classList.add('hide');
+//     checkboxDOMselect(event.target);
+//   }
+//   return teams;
+// });
 
 // checkboxes.addEventListener('change', (event) =>{
 //   createTeams(checkboxes, event.target.id)
 // })
+clearTeam.addEventListener("click", (event) => {
+  clearTeams(teams, checkboxes);
+})
+
 createTeam.addEventListener("click", (event) => {
   createTeams(checkboxes, event.target.id)
 });

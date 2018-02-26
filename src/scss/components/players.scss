@@ -16,11 +16,14 @@
   .controls {
     grid-column: 1 / span 5;
     grid-column-start: auto;
+    margin: 30px;
     @media (min-width: $tablet) {
       grid-column: inherit;
+      margin: 0;
     }
   }
   .create,
+  .clear,
   .edit {
     border: 2px solid black;
     padding: 20px 40px;
@@ -30,6 +33,7 @@
     background-color: $white;
     font-size: 16px;
     font-weight: bold;
+    margin: 10px auto;
     @media(min-width: $tablet) {
       padding: 20px;
       width: 250px;
