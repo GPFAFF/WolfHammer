@@ -31,10 +31,12 @@ const checkboxDOMselect = (checkValue, parentElement) => {
 const createTeams = (arr, target) => {
   if (!arr.checked) {
     const players = Array.from(document.querySelectorAll('input:checked')).filter((input => {
-      return {
-        id: input.id,
-        name: input.name
-      };
+      if (!input.getAttribute('disabled')) {
+        return {
+          id: input.id,
+          name: input.name
+        };
+      }
     }))
 
     if (players.length) {
