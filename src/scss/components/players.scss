@@ -4,14 +4,23 @@
   display: grid;
   justify-content: center;
   place-items: center;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   padding: 40px 0;
   grid-row-gap: 20px;
   background: $boxbg;
   color: $white;
   margin: 40px 0px 60px;
   @media (min-width: $tablet) {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .team_checkboxes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 50px;
+    @media (min-width: $tablet) {
+      grid-gap: 100px;
+    }
   }
   .controls {
     grid-column: 1 / span 5;
@@ -26,7 +35,7 @@
   .clear,
   .edit {
     border: 2px solid black;
-    padding: 20px 40px;
+    padding: 20px 30px;
     width: 100%;
     text-transform: uppercase;
     transition: 0.3s ease;
@@ -65,7 +74,7 @@
     }
   }
   .team {
-    grid-column: span 2;
+    //grid-column: span 2;
     @media(min-width: $tablet) {
       grid-column: span 1;
     }
@@ -107,6 +116,18 @@
       display: grid;
       letter-spacing: 1px;
       font-size: $font_medium;
+    }
+    .team_1 {
+      grid-column: span 1;
+    }
+    .team_2 {
+      grid-column: span 2;
+    }
+    .team_3 {
+      grid-column: span 3;
+    }
+    .team_4 {
+      grid-column: span 4;
     }
   }
 }
