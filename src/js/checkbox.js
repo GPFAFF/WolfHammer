@@ -102,6 +102,7 @@ const calculateScore = (event, target) => {
 
     activeTeam.score += parseInt(current.dataset.dot);
     updateTeamData(activeTeam);
+    scoreBoardTally();
   } else {
       console.error('You must pick a player first.');
   }
@@ -135,6 +136,16 @@ const updateTeamData = (activeTeam) => {
     document.querySelectorAll('.teamz')[player.value - 1].innerHTML = `${player.name} has ${activeTeam.score} dots.`
   })
 };
+
+const scoreBoardTally = () => {
+  console.log(scoreBoard);
+  console.log(teams);
+  const teamOne = teams[0];
+  const teamTwo = teams[1];
+
+  scoreBoard.innerHTML = `Scorecard: ${Number(teamOne.score - teamTwo.score)}`
+
+}
 
 // EL's
 // document.addEventListener("click", event => {
