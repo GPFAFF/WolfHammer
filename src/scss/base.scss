@@ -197,3 +197,27 @@ footer {
   @include photoBackground(wasabi,
   30% 50%);
 }
+
+.junkman {
+  @include photoBackground(junkman,
+  30% 50%);
+}
+
+.kevinna {
+  @include photoBackground(na,
+  30% 50%);
+}
+
+.rambo {
+  @include photoBackground(rambo,
+  30% 0%);
+}
+
+.albatross {
+  @include photoBackground(albatross,
+  30% 50%);
+}
+
+// .junkman {
+//   @include photoBackground(junkman, 30% 50%);
+// }
