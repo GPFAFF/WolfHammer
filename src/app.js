@@ -7,7 +7,7 @@ import './scss/components/players.scss';
 import './scss/base.scss';
 
 // imports all images
-function requireAll(image) { image.keys().forEach(image); }
+function requireAll(image) { image.keys().forEach(image, console.log(image)); }
 requireAll(require.context('./img/', true));
 
 console.log('The Wolf is coming!');

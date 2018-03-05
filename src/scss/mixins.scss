@@ -57,7 +57,7 @@
   outline: 0;
 }
 
-@mixin photoBackground($rule, $position) {
+@mixin photoBackground($rule, $position: 30% 50%) {
   background: linear-gradient($photobg, $photobg),
   url('img/#{$rule}.jpg');
   background-size: cover;

@@ -178,34 +178,16 @@ footer {
   50% 20%);
 }
 
-.boomerang {
-  @include photoBackground(boomerang,
-  50% 20%);
-}
-
 .tree-whack {
-  @include photoBackground(treewhack,
-  30% 50%);
+  @include photoBackground(treewhack);
 }
 
 .rattler {
-  @include photoBackground(rattler,
-  30% 50%);
-}
-
-.wasabi {
-  @include photoBackground(wasabi,
-  30% 50%);
+  @include photoBackground(rattler);
 }
 
 .junkman {
-  @include photoBackground(junkman,
-  30% 50%);
-}
-
-.kevinna {
-  @include photoBackground(na,
-  30% 50%);
+  @include photoBackground(junkman);
 }
 
 .rambo {
@@ -214,10 +196,101 @@ footer {
 }
 
 .albatross {
-  @include photoBackground(albatross,
-  30% 50%);
+  @include photoBackground(albatross);
 }
 
-// .junkman {
-//   @include photoBackground(junkman, 30% 50%);
-// }
+.adolf {
+  @include photoBackground(hitler);
+}
+
+.starwars {
+  @include photoBackground(starwars);
+}
+
+.kevinna {
+  @include photoBackground(kevinnaw,
+  30% 0%);
+}
+
+.wasabi {
+  @include photoBackground(wasabi,
+  30% 30%);
+}
+
+.poley {
+  @include photoBackground(poley);
+}
+
+.adrian {
+  @include photoBackground(rocky);
+}
+
+.binladen {
+  @include photoBackground(binladen,
+  50% 50%);
+}
+
+.birdie {
+  @include photoBackground(birdie);
+}
+
+.boomerang {
+  @include photoBackground(boomerang);
+}
+
+.nascar {
+  @include photoBackground(nascar);
+}
+
+.seve {
+  @include photoBackground(seve,
+  50% 0%);
+}
+
+.ky {
+  @include photoBackground(ky,
+  50% 0%);
+}
+
+.oj {
+  @include photoBackground(oj);
+}
+
+.pornstar {
+  @include photoBackground(pornstar,
+  50% 100%);
+}
+
+.creekie {
+  @include photoBackground(creekie);
+}
+
+.greenie {
+  @include photoBackground(greenie);
+}
+
+.take {
+  @include photoBackground(take);
+}
+
+.offner {
+  @include photoBackground(offner);
+}
+
+.menage {
+  @include photoBackground(menage);
+}
+
+.taint {
+  @include photoBackground(taint,
+  50% 30%);
+}
+
+.moanback {
+  @include photoBackground(moanback,
+  50% 30%);
+}
+
+.double_wasabi {
+  @include photoBackground(double_wasabi);
+}
