@@ -18,7 +18,3 @@ function calculateScore(event, target) {
 
 dots.forEach(dot => dot.addEventListener('click', calculateScore));
 
-
-// const updateTeamData = () => {
-//   document.querySelectorAll('#team-data')[0].innerHTML = JSON.stringify(teams);
-// };

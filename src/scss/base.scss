@@ -91,7 +91,7 @@ html {
       position: relative;
       color: $white;
       h4 {
-        font-size: $font_medium;
+        font-size: 30px;
         letter-spacing: 2px;
         text-transform: uppercase;
       }
@@ -126,7 +126,7 @@ html {
           }
         }
         p {
-          font-size: $font_small;
+          font-size: $font_medium;
         }
       }
       .dots,
