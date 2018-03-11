@@ -1,3 +1,5 @@
+import { noPlayersError, clearErrors } from './errors';
+
 const createTeam = document.querySelector('.create');
 const editTeam = document.querySelector('.edit');
 const clearTeam = document.querySelector('.clear');
@@ -61,9 +63,11 @@ const createTeams = (arr, target) => {
         createTeam.setAttribute("disabled", "disabled");
       }
       updateTeamSelect();
+      clearErrors();
+
     }
     if (!players.length) {
-      console.error('PICK A PLAYER');
+      noPlayersError();
     }
   }
   // const players = Array.from(document.querySelectorAll('input:checked')).map(input => { return { id: input.id, name: input.name }; });
@@ -85,6 +89,7 @@ const clearTeams = (teams, checkboxes) => {
   setTeams.childNodes.forEach((team, index) => {
     team.childNodes.forEach(target => target.remove());
   })
+  clearErrors();
 
   teams.length = 0;
 }
@@ -103,15 +108,16 @@ const calculateScore = (event, target) => {
     activeTeam.score += parseInt(current.dataset.dot);
     updateTeamData(activeTeam);
     scoreBoardTally();
+    clearErrors();
+
   } else {
-      console.error('You must pick a player first.');
+     noPlayersError();
   }
 }
 
 const updateTeamSelect = () => {
   const teamSelect = document.querySelectorAll('.active_team__select')[0];
 
-  console.log(teamSelect);
   teamSelect.innerHTML = '';
 
   teams.forEach(item => {
@@ -138,8 +144,8 @@ const updateTeamData = (activeTeam) => {
 };
 
 const scoreBoardTally = () => {
-  console.log(scoreBoard);
-  console.log(teams);
+  // console.log(scoreBoard);
+  // console.log(teams);
   const teamOne = teams[0];
   const teamTwo = teams[1];
 
@@ -156,9 +162,10 @@ const scoreBoardTally = () => {
 //   return teams;
 // });
 
-// checkboxes.addEventListener('change', (event) =>{
-//   createTeams(checkboxes, event.target.id)
-// })
+checkboxes.forEach(checkbox => checkbox.addEventListener('change', (event) =>{
+  clearErrors();
+}))
+
 clearTeam.addEventListener("click", (event) => {
   clearTeams(teams, checkboxes);
 })
