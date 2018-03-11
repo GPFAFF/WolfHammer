@@ -6,7 +6,8 @@ const clearTeam = document.querySelector('.clear');
 const setTeams = document.querySelector('.set_teams');
 const checkboxes = Array.from(document.querySelectorAll('input'));
 const teamSelectBox = document.querySelectorAll('.active_team__select');
-const teamz = setTeams.querySelectorAll('.teamz');
+const teamOne = setTeams.querySelector('.team_1');
+const teamTwo = setTeams.querySelector('.team_2');
 const scoreBoard = document.querySelector('.score');
 const dots = Array.from(document.querySelectorAll('.dots'));
 const teamSelect = document.querySelectorAll('.active_team');
@@ -138,14 +139,17 @@ const editTeams = (checkbox) => {
 }
 
 const updateTeamData = (activeTeam) => {
+  const team = document.querySelector('.set_teams');
+  let players = [];
   activeTeam.players.forEach((player, index) => {
-    document.querySelectorAll('.teamz')[player.value - 1].innerHTML = `${player.name} has ${activeTeam.score} dots.`
+    players.push(player.name);
   })
+  const appendTeam = `.team_${activeTeam.id + 1 }`;
+  const target = team.querySelector(appendTeam);
+  target.innerHTML = `${players.join(', ')} has ${activeTeam.score} dots`
 };
 
 const scoreBoardTally = () => {
-  // console.log(scoreBoard);
-  // console.log(teams);
   const teamOne = teams[0];
   const teamTwo = teams[1];
 

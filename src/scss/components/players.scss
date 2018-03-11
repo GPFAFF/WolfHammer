@@ -124,22 +124,20 @@
     .team_2 {
       grid-column: span 2;
     }
-    .team_3 {
-      grid-column: span 3;
-    }
-    .team_4 {
-      grid-column: span 4;
-    }
   }
 }
 
 .set_teams {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   text-transform: uppercase;
   margin-bottom: 60px;
-  .teamz {
-    font-size: 16px;
+  @media (min-width: $tablet) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .team_1,
+  .team_2 {
+    font-size: $font_medium;
     @media(min-width: $tablet) {
       font-size: 24px;
     }
